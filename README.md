@@ -1,143 +1,254 @@
 # APK OMEN
-### AI-Assisted Static Android Security Engine
 
+**AI-Assisted Static Android Security Engine**
 
-> **"Stop waiting for scans. Start fixing vulnerabilities."**
+> *"Stop waiting for scans. Start fixing vulnerabilities."*
 
----
-
-## Team: APK_Omen
-
-| Name | Roll Number | 
-| :--- | :--- | :--- |
-| **Vishal Singh Rajpurohit** | B25339 | 
-| **Dhrudev Popatbhai Sutreja** | B25350 | 
-| **Pratyush Rai** | B25223 | 
-| **Pratik Sanap** | B25222 | 
+APK Omen is a stream-based static analysis engine that identifies Android security vulnerabilities through intelligent binary analysis and AI-powered threat assessment.
 
 ---
 
-# PART 1: Project Overview & Demo
+##  Key Features
 
-### Watch the Demo
-[**CLICK HERE TO WATCH THE VIDEO WALKTHROUGH**](INSERT_YOUR_VIDEO_LINK_HERE)
+- ** High-Speed Analysis** - Scans average-sized APKs in under 60 seconds using stream-based extraction
+- ** Ghost Permission Detection** - Identifies permissions declared but never used in code
+- ** Native Library Analysis** - Scans `.so` (C/C++) libraries for binary protection flaws (PIE/NX)
+- ** AI-Powered Intelligence** - Uses Groq API (Llama 3/Mixtral) to explain threat context and impact
+- ** OWASP Compliance** - Maps vulnerabilities to OWASP Mobile Top 10 categories
+- ** Professional Reports** - Generates boardroom-ready PDF reports automatically
 
-### Live Deployment
-[**ACCESS LIVE DASHBOARD**](http://135.235.195.207:3000)
+---
+
+##  Team
+
+| Name | Roll Number |
+|------|-------------|
+| Vishal Singh Rajpurohit | B25339 |
+| Dhrudev Popatbhai Sutreja | B25350 |
+| Pratyush Rai | B25223 |
+| Pratik Sanap | B25222 |
+
+---
+
+##  Quick Links
+
+- ** [Video Walkthrough](INSERT_YOUR_VIDEO_LINK_HERE)**
+- ** [Live Dashboard](http://135.235.195.207:3000)**
+- ** [GitHub Repository](https://github.com/dotcomVishal/APK_Omen.git)**
+
+---
+
+##  Architecture
+
+APK Omen uses a **stream-based static analysis pipeline** that bypasses traditional decompilation bottlenecks:
+
+### Analysis Pipeline
+
+```
+┌─────────────┐      ┌──────────────┐      ┌─────────────┐      ┌──────────────┐
+│  APK Upload │ ───> │  Extraction  │ ───> │ Risk Mapping│ ───> │  AI Analysis │
+│  (Frontend) │      │  (Binary)    │      │  (OWASP)    │      │  (Groq API)  │
+└─────────────┘      └──────────────┘      └─────────────┘      └──────────────┘
+                             │                      │                     │
+                             v                      v                     v
+                     YARA Rules + DEX         Deterministic          LLM Reasoning
+                     Manifest Parsing         Threat Scoring         + Context
+```
 
 ### How It Works
-APK Omen is a **Stream-Based Static Analysis Engine**. Unlike traditional tools that rely on slow decompilation or heavy dynamic sandboxing, we extract raw binary features directly from the APK structure to identify threats.
 
-**The Pipeline:**
-1.  **Ingestion:** User uploads APK via the Next.js Frontend.
-2.  **Extraction (The Truth):** The Python Backend (`/back`) parses ELF headers, DEX bytecode, and the Android Manifest using YARA rules.
-3.  **Risk Mapping (The Logic):** Raw indicators are deterministically mapped to **OWASP Mobile Top 10** categories.
-4.  **Intelligence Node (The Reasoning):** We feed the structured JSON findings into the **Groq API (Llama 3/Mixtral)**. The AI generates a human-readable narrative explaining *why* a specific permission or API call is dangerous in this specific context.
-5.  **Reporting:** The user gets an instant dashboard with a "Threat Score" and a downloadable, boardroom-ready PDF report.
+1. **Ingestion** - User uploads APK via the Next.js frontend
+2. **Extraction** - Python backend parses ELF headers, DEX bytecode, and Android Manifest using YARA rules
+3. **Risk Mapping** - Raw indicators are deterministically mapped to **OWASP Mobile Top 10** categories
+4. **Intelligence Layer** - Structured JSON findings are sent to **Groq API (Llama 3/Mixtral)** for contextual threat analysis
+5. **Reporting** - User receives an instant dashboard with threat score and downloadable PDF report
 
 ---
 
-# PART 2: Guide (Local Installation)
-
-Follow these detailed steps to run the full APK Omen suite on your local machine.
+##  Installation
 
 ### Prerequisites
-* **Git** installed.
-* **Python 3.10+** installed.
-* **Node.js 18+** installed.
-* A **Groq API Key** (Free tier available at [console.groq.com](https://console.groq.com)).
 
-### 1. Clone the Repository
-Start by downloading the source code.
+- **Git** - Version control
+- **Python 3.10+** - Backend runtime
+- **Node.js 18+** - Frontend runtime
+- **Groq API Key** - Get free tier at [console.groq.com](https://console.groq.com)
+
+### Step 1: Clone the Repository
+
 ```bash
-git clone [https://github.com/dotcomVishal/APK_Omen.git](https://github.com/dotcomVishal/APK_Omen.git)
+git clone https://github.com/dotcomVishal/APK_Omen.git
 cd APK_Omen
-2. Setup the "Brain" (Backend)
-The backend is built with FastAPI. It handles the heavy lifting: file parsing, static analysis, and AI communication.
+```
 
-Step A: Navigate to the backend folder
+### Step 2: Backend Setup
 
-Bash
+#### Navigate to backend directory
+```bash
 cd back
-Step B: Create a virtual environment
-This keeps dependencies isolated.
+```
 
-Windows:
+#### Create and activate virtual environment
 
-Bash
+**Windows:**
+```bash
 python -m venv venv
 .\venv\Scripts\activate
-Mac/Linux:
+```
 
-Bash
+**Mac/Linux:**
+```bash
 python3 -m venv venv
 source venv/bin/activate
-Step C: Install dependencies
+```
 
-Bash
+#### Install dependencies
+```bash
 pip install -r requirements.txt
-Step D: Configure the Intelligence Node (AI Key)
-Crucial Step: The AI reporting feature requires a Groq API key.
+```
 
-Open the file back/core/ai_report.py.
+#### Configure AI Integration
 
-Locate the line where api_key is defined (it is currently commented out or empty).
+1. Open `back/core/ai_report.py`
+2. Locate the `api_key` variable
+3. Add your Groq API key:
 
-Uncomment it and paste your key inside the quotes like this:
-
-Python
+```python
 # Inside back/core/ai_report.py
 api_key = "gsk_YOUR_ACTUAL_GROQ_KEY_HERE"
-Save the file.
+```
 
-Step E: Ignite the Engine
-Start the backend server.
+4. Save the file
 
-Bash
+#### Start the backend server
+```bash
 uvicorn main_app:app --reload --port 8000
- Success: You should see "Uvicorn running on https://www.google.com/search?q=http://127.0.0.1:8000". Keep this terminal open!
+```
 
-3. Setup the "Face" (Frontend)
-The frontend is built with Next.js. It provides the dark-mode terminal interface and PDF generation.
+ **Success:** You should see `Uvicorn running on http://127.0.0.1:8000`
 
-Step A: Open a New Terminal
-Do not close the backend terminal. Open a new window and navigate to the project root.
+### Step 3: Frontend Setup
 
-Step B: Navigate to the frontend folder
+#### Open a new terminal and navigate to frontend
 
-Bash
-cd ../front
-Step C: Install Node packages
+```bash
+cd front
+```
 
-Bash
+#### Install Node packages
+```bash
 npm install
-Step D: Launch the UI
+```
 
-Bash
+#### Launch the development server
+```bash
 npm run dev
- Success: You should see "Ready in xxxxms".
+```
 
-4. Run the Analysis
-Open your browser and go to http://localhost:3000.
+ **Success:** You should see `Ready in X ms` and the app will be available at `http://localhost:3000`
 
-Click "Initialize Scan".
+---
 
-Upload any .apk file.
+##  Usage
 
-Watch as the engine extracts metadata, calculates the threat score, and generates the AI report in real-time.
+1. Open your browser and navigate to `http://localhost:3000`
+2. Click **"Initialize Scan"**
+3. Upload any `.apk` file
+4. Watch the real-time analysis:
+   - Metadata extraction
+   - Threat score calculation
+   - AI-powered report generation
+5. Download the professional PDF report
 
-Key Features for Evaluation
-Speed: Scans average-sized APKs in under 60 seconds using stream-based extraction.
+---
 
-Ghost Permissions: Detects permissions requested in the Manifest that are never used in the actual code (reducing attack surface).
+##  Technology Stack
 
-Native Analysis: Scans .so (C/C++) libraries for binary protection flaws like missing PIE/NX.
+### Backend
+- **FastAPI** - High-performance API framework
+- **Python 3.10+** - Core analysis engine
+- **YARA** - Pattern matching for threat detection
+- **Groq API** - LLM integration (Llama 3/Mixtral)
 
-AI Context: Doesn't just say "Risk Found"—it explains the impact of that risk using LLM reasoning.
+### Frontend
+- **Next.js** - React framework
+- **React** - UI library
+- **Tailwind CSS** - Styling
+- **PDF Generation** - Automated reporting
 
-Professional Reports: Generates vector-quality PDF reports automatically.
+### Analysis Tools
+- DEX bytecode parser
+- ELF header analyzer
+- Android Manifest parser
+- Binary protection scanner
 
-Disclaimer
-APK Omen is a defensive security tool designed for educational and authorized testing purposes only. The authors are not responsible for any misuse of this software.
+---
 
-Built by Team APK_Omen
+##  Features in Detail
+
+### Ghost Permissions
+Detects permissions requested in the Android Manifest that are never actually used in the code, helping reduce unnecessary attack surface.
+
+### Native Library Analysis
+Scans `.so` (C/C++) libraries for critical binary protection mechanisms:
+- PIE (Position Independent Executable)
+- NX (No-Execute) bit
+- Stack canaries
+
+### AI Context Engine
+Goes beyond simple vulnerability detection by providing:
+- Contextual threat explanations
+- Impact assessment for specific risks
+- Remediation recommendations
+- Risk prioritization
+
+### OWASP Mobile Top 10 Mapping
+Automatically categorizes findings according to industry-standard security frameworks:
+- M1: Improper Platform Usage
+- M2: Insecure Data Storage
+- M3: Insecure Communication
+- M4: Insecure Authentication
+- M5: Insufficient Cryptography
+- M6: Insecure Authorization
+- M7: Client Code Quality
+- M8: Code Tampering
+- M9: Reverse Engineering
+- M10: Extraneous Functionality
+
+---
+
+##  Disclaimer
+
+APK Omen is a **defensive security tool** designed for:
+- Educational purposes
+- Authorized security testing
+- Research and development
+
+**The authors are not responsible for any misuse of this software.** Always ensure you have proper authorization before analyzing any application.
+
+---
+
+##  License
+
+This project is developed by Team APK_Omen for educational purposes.
+
+---
+
+##  Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+
+---
+
+## 📧 Contact
+
+For questions or collaboration opportunities, please reach out to the team members listed above.
+
+---
+
+
+
+**Built with 🔒 by Team APK_Omen**
+
+
+
