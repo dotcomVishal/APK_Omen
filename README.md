@@ -32,7 +32,7 @@ APK Omen is a stream-based static analysis engine that identifies Android securi
 
 ##  Quick Links
 
-- ** [Video Walkthrough](INSERT_YOUR_VIDEO_LINK_HERE)**
+- ** [Video Walkthrough](https://youtu.be/Xyi0iLliF-E)**
 - ** [Live Dashboard](http://135.235.195.207:3000)**
 - ** [GitHub Repository](https://github.com/dotcomVishal/APK_Omen.git)**
 
@@ -51,7 +51,7 @@ APK Omen uses a **stream-based static analysis pipeline** that bypasses traditio
 └─────────────┘      └──────────────┘      └─────────────┘      └──────────────┘
                              │                      │                     │
                              v                      v                     v
-                     YARA Rules + DEX         Deterministic          LLM Reasoning
+                                  DEX         Deterministic          LLM Reasoning
                      Manifest Parsing         Threat Scoring         + Context
 ```
 
@@ -167,7 +167,6 @@ npm run dev
 ### Backend
 - **FastAPI** - High-performance API framework
 - **Python 3.10+** - Core analysis engine
-- **YARA** - Pattern matching for threat detection
 - **Groq API** - LLM integration (Llama 3/Mixtral)
 
 ### Frontend
@@ -215,40 +214,12 @@ Automatically categorizes findings according to industry-standard security frame
 - M9: Reverse Engineering
 - M10: Extraneous Functionality
 
----
-
-##  Disclaimer
-
-APK Omen is a **defensive security tool** designed for:
-- Educational purposes
-- Authorized security testing
-- Research and development
-
-**The authors are not responsible for any misuse of this software.** Always ensure you have proper authorization before analyzing any application.
-
----
-
-##  License
-
-This project is developed by Team APK_Omen for educational purposes.
-
----
-
-##  Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
-
----
-
-## 📧 Contact
-
-For questions or collaboration opportunities, please reach out to the team members listed above.
 
 ---
 
 
 
-**Built with 🔒 by Team APK_Omen**
+**Built by Team APK_Omen**
 
 
 
