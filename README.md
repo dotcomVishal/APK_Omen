@@ -34,7 +34,7 @@ APK Omen is a stream-based static analysis engine that identifies Android securi
 
 - ** [Video Walkthrough](https://youtu.be/Xyi0iLliF-E)**
 - ** [Live Dashboard](http://135.235.195.207:3000)**
-- ** ^ Click this link to use our scanner !
+       ** ^ Click this link to use our scanner !
 
 ---
 
