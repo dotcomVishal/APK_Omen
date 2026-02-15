@@ -1,0 +1,17 @@
+from core.engine import SentinAIEngine
+from core.report_adapter import ReportAdapter
+from core.ai_report import generate_ai_report
+import json
+
+APK_PATH = "samples/InsecureBankv2.apk"
+
+engine = SentinAIEngine(APK_PATH)
+raw_findings = engine.start_pipeline()
+
+report = ReportAdapter.normalize(raw_findings)
+
+print("\n--- AI SECURITY REPORT ---\n")
+
+ai_report = generate_ai_report(report)
+
+print(ai_report)
